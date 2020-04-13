@@ -1,4 +1,4 @@
-# DadJokes
+# DadJokes [WIP]
 
 A Dad Joke generator app built using [React NodeGui](https://react.nodegui.org). This app is a working proof of concept app to showcase how you can build and distribute a React NodeGui/NodeGui app to respective app stores.
 

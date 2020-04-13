@@ -10,3 +10,6 @@ if (module.hot) {
     Renderer.forceUpdate();
   });
 }
+
+
+setInterval(()=>null, 1000); //hackfix for now
