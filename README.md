@@ -2,7 +2,7 @@
 
 A Dad Joke generator app built using [React NodeGui](https://react.nodegui.org). This app is a working proof of concept app to showcase how you can build and distribute a React NodeGui/NodeGui app to respective app stores.
 
-<img alt="logo" src="https://github.com/maaster-atul/DadJokes/raw/master/assets/dadjoke.png" height="500" />
+<img alt="logo" src="https://github.com/master-atul/DadJokes/raw/master/assets/dadjoke.png" height="200" />
 
 ## Downloads
 
