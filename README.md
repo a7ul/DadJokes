@@ -99,6 +99,7 @@ Now you are ready to distribute your MacOS app.
 
 First step is to create a certificate for app store
 
+0. Make sure you have a valid icns icon for your app. Use the following guide: https://docs.unity3d.com/Manual/HOWTO-PortToAppleMacStore.html
 1. Open up apple developer site. 
 https://developer.apple.com
 
@@ -126,15 +127,30 @@ https://developer.apple.com
 - Now go to `My Apps` and click `+`.
 - Fill out the form and use `?` for help if needed. Then click on `create` button.
 - Now fill out `App Information`, `Pricing and Availability` and `Prepare for Submission` forms.
-- Upload your app using these commands or the transporter macos app.
-    ```sh
-    ditto -ck --rsrc --sequesterRsrc --keepParent YourApp.app "YourApp.zip"
 
+8. Creating a .pkg installer. 
+- Create a new certificate for the installer. This time choose `Mac Installer Distribution` while creating the cert and install it to your computer.
+- Run productbuild to build a unsigned pkg file
 
-    xcrun altool --validate-app -f YourApp.zip -t osx -u username -p password
+```sh
+productbuild --component ./DadJokes.app /Applications/ DadJokes.pkg
+```
+Now sign it
 
-    xcrun altool --upload-app -f YourApp.zip -t osx -u username -p password
-    ```
+```sh
+productsign --sign "3rd Party Mac Developer Installer: Your name (ID)" DadJokes.pkg DadJokesSigned.pkg
+```
+
+9.  Upload using these commands:
+
+```xcrun altool  --username "your username" --password "your app specific password" --validate-app -f DadJokesSigned.pkg```
+
+Fix any issue that is raised and retry until you succeed.
+
+Then finally upload: 
+
+```xcrun altool  --username "your username" --password "your app specific password" --upload-app -f DadJokesSigned.pkg```
+
 
 Now you are ready to distribute your MacOS app.
 
