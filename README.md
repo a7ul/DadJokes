@@ -68,7 +68,7 @@ First step is to create a certificate for distribution
 1. Open up apple developer site. 
 https://developer.apple.com
 
-2. Create a new app id for example `com.atulr.dadjokes`
+2. Create a new app id if it doesnt exist already, for example `com.atulr.dadjokes`
 
 3. Now open up Certificates tab (https://developer.apple.com/account/resources/certificates/list)
 
@@ -78,10 +78,10 @@ https://developer.apple.com
 - Once done you can download the certificate and install it onto your computer by double clicking it.
 
 4.  Make sure you have these values:
-- Your identity: This is a unique identifier assigned to your organization or account. You can find it at https://developer.apple.com/account/#/membership/ . Look for Team ID
+- Your cert identity: You can check your keychain and find something like this: `Developer ID Application: Name (ascProviderID)` 
 - Your apple email id you use to login to developer.apple.com
 - You apple app specific password created for this app
-- ascProvider which is equal to your identity in most cases.
+- ascProvider: This is a unique identifier assigned to your organization or account. You can find it at https://developer.apple.com/account/#/membership/ . Look for Team ID
 
 
 5. Now open up ./pack.sh and replace the necessary values. Run `./pack.sh`. This should create a packed and signed app.
@@ -96,6 +96,47 @@ https://developer.apple.com
 Now you are ready to distribute your MacOS app.
 
 ## Onto the Mac app store.
+
+First step is to create a certificate for app store
+
+1. Open up apple developer site. 
+https://developer.apple.com
+
+2. Create a new app id if it doesnt exist already, for example `com.atulr.dadjokes`
+
+3. Now open up Certificates tab (https://developer.apple.com/account/resources/certificates/list)
+
+- Click on `+` icon to create a new certificate.
+- Choose `Mac App Distribution` and click on continue.
+- Generate a CSR using keychain and upload it. 
+- Once done you can download the certificate and install it onto your computer by double clicking it.
+
+4.  Make sure you have these values:
+- Your cert identity: You can check your keychain and find something like this: `3rd Party Mac Developer Application: Name (ascProviderId)` 
+- Your apple email id you use to login to developer.apple.com
+- You apple app specific password created for this app
+- ascProvider: This is a unique identifier assigned to your organization or account. You can find it at https://developer.apple.com/account/#/membership/ . Look for Team ID
+
+
+5. Now open up ./pack.sh and replace the necessary values. Run `./pack.sh`. This should create a packed and signed app. Test your app if it works fine.
+
+6. You do not need to notarise your app if you are distributing via macos app store.
+
+7. Open up App Store connect: https://appstoreconnect.apple.com/ and login with your apple id.
+- Now go to `My Apps` and click `+`.
+- Fill out the form and use `?` for help if needed. Then click on `create` button.
+- Now fill out `App Information`, `Pricing and Availability` and `Prepare for Submission` forms.
+- Upload your app using these commands or the transporter macos app.
+    ```sh
+    ditto -ck --rsrc --sequesterRsrc --keepParent YourApp.app "YourApp.zip"
+
+
+    xcrun altool --validate-app -f YourApp.zip -t osx -u username -p password
+
+    xcrun altool --upload-app -f YourApp.zip -t osx -u username -p password
+    ```
+
+Now you are ready to distribute your MacOS app.
 
 
 ## License
