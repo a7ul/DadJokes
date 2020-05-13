@@ -12,4 +12,3 @@ if (module.hot) {
 }
 
 
-setInterval(()=>null, 1000); //hackfix for now
